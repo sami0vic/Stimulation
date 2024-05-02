@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Circle Simulation</title>
+<style>
+    body {
+        background-color: rgb(255, 255, 255);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    #container {
+        width: 600px;
+        height: 600px;
+        border: 1px solid rgb(0, 0, 0);
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .point {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        position: absolute;
+        z-index: 1;
+    }
+    #point1 {
+        background-color: red;
+    }
+    #point2 {
+        background-color: rgb(255, 242, 0);
+    }
+    #point3 {
+        background-color: rgb(0, 225, 255);
+    }
+    #point4 {
+        background-color: rgb(47, 255, 0);
+    }
+    button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    #circleCanvas {
+        position: relative;
+        right: -10px;
+        bottom: -10px;
+    }
+</style>
+</head>
+<body>
+<div id="container">
+    <canvas id="circleCanvas" width="600" height="600"></canvas>
+    <div class="point" id="point1"></div>
+    <div class="point" id="point2"></div>
+    <div class="point" id="point3"></div>
+    <div class="point" id="point4"></div>
+</div>
+<button onclick="startSimulation()">Start Simulation</button>
+
+<script>
+    
+    // Define the center and radius of the circle
+    var centerX = 300;
+    var centerY = 300;
+    var radius = 200;
+
+    // Calculate the positions of the points
+    var angle1 = 0;
+    var angle2 = 0;
+    var angle3 = 0;
+    var angle4 = 0;
+
+    var circleCanvas = document.getElementById("circleCanvas");
+    var ctxCircle = circleCanvas.getContext("2d");
+
+    function drawCircle(centerX, centerY, radius) {
+        ctxCircle.beginPath();
+        ctxCircle.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+        ctxCircle.strokeStyle = "black";
+        ctxCircle.stroke();
+    }
+
+    drawCircle(centerX, centerY, radius);
+
+    var point1X = centerX + radius * Math.cos(angle1);
+    var point1Y = centerY + radius * Math.sin(angle1);
+    var point2X = centerX + radius * Math.cos(angle2);
+    var point2Y = centerY + radius * Math.sin(angle2);
+    var point3X = centerX + radius * Math.cos(angle3);
+    var point3Y = centerY + radius * Math.sin(angle3);
+    var point4X = centerX + radius * Math.cos(angle4);
+    var point4Y = centerY + radius * Math.sin(angle4);
+
+    // Set the initial positions of the points
+    document.getElementById("point1").style.left = point1X + "px";
+    document.getElementById("point1").style.top = point1Y + "px";
+    document.getElementById("point2").style.left = point2X + "px";
+    document.getElementById("point2").style.top = point2Y + "px";
+    document.getElementById("point3").style.left = point3X + "px";
+    document.getElementById("point3").style.top = point3Y + "px";
+    document.getElementById("point4").style.left = point4X + "px";
+    document.getElementById("point4").style.top = point4Y + "px";
+
+    // Function to update the position of points
+    function updatePositions() {
+        // Calculate new positions (for this example, I'll just make the points rotate around the circle)
+        var rotationSpeed1 = 0.02/6;
+        var rotationSpeed2 = 0.03/6;
+        var rotationSpeed3 = 0.07/6;
+        var rotationSpeed4 = 0.01/6;
+        var newAngle1 = angle1 - rotationSpeed1;
+        var newAngle2 = angle2 - rotationSpeed2;
+        var newAngle3 = angle3 -  rotationSpeed3;
+        var newAngle4 = angle4 - rotationSpeed4;
+
+        var newPoint1X = centerX + radius * Math.cos(newAngle1);
+        var newPoint1Y = centerY + radius * Math.sin(newAngle1);
+        var newPoint2X = centerX + radius * Math.cos(newAngle2);
+        var newPoint2Y = centerY + radius * Math.sin(newAngle2);
+        var newPoint3X = centerX + radius * Math.cos(newAngle3);
+        var newPoint3Y = centerY + radius * Math.sin(newAngle3);
+        var newPoint4X = centerX + radius * Math.cos(newAngle4);
+        var newPoint4Y = centerY + radius * Math.sin(newAngle4);
+
+        // Update DOM elements
+        document.getElementById("point1").style.left = newPoint1X + "px";
+        document.getElementById("point1").style.top = newPoint1Y + "px";
+        document.getElementById("point2").style.left = newPoint2X + "px";
+        document.getElementById("point2").style.top = newPoint2Y + "px";
+        document.getElementById("point3").style.left = newPoint3X + "px";
+        document.getElementById("point3").style.top = newPoint3Y + "px";
+        document.getElementById("point4").style.left = newPoint4X + "px";
+        document.getElementById("point4").style.top = newPoint4Y + "px";
+
+        // Update angles
+        angle1 = newAngle1;
+        angle2 = newAngle2;
+        angle3 = newAngle3;
+        angle4 = newAngle4;
+    }
+
+    // Start the simulation
+    function startSimulation() {
+        setInterval(updatePositions, 20); // Update positions every 20 milliseconds
+    }
+</script>
+</body>
+</html>
