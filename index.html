@@ -66,13 +66,10 @@
 <button onclick="startSimulation()">Start Simulation</button>
 
 <script>
-    
-    // Define the center and radius of the circle
     var centerX = 300;
     var centerY = 300;
     var radius = 200;
 
-    // Calculate the positions of the points
     var angle1 = 0;
     var angle2 = 0;
     var angle3 = 0;
@@ -99,7 +96,6 @@
     var point4X = centerX + radius * Math.cos(angle4);
     var point4Y = centerY + radius * Math.sin(angle4);
 
-    // Set the initial positions of the points
     document.getElementById("point1").style.left = point1X + "px";
     document.getElementById("point1").style.top = point1Y + "px";
     document.getElementById("point2").style.left = point2X + "px";
@@ -109,9 +105,7 @@
     document.getElementById("point4").style.left = point4X + "px";
     document.getElementById("point4").style.top = point4Y + "px";
 
-    // Function to update the position of points
     function updatePositions() {
-        // Calculate new positions (for this example, I'll just make the points rotate around the circle)
         var rotationSpeed1 = 0.02/6;
         var rotationSpeed2 = 0.03/6;
         var rotationSpeed3 = 0.07/6;
@@ -130,7 +124,6 @@
         var newPoint4X = centerX + radius * Math.cos(newAngle4);
         var newPoint4Y = centerY + radius * Math.sin(newAngle4);
 
-        // Update DOM elements
         document.getElementById("point1").style.left = newPoint1X + "px";
         document.getElementById("point1").style.top = newPoint1Y + "px";
         document.getElementById("point2").style.left = newPoint2X + "px";
@@ -140,16 +133,13 @@
         document.getElementById("point4").style.left = newPoint4X + "px";
         document.getElementById("point4").style.top = newPoint4Y + "px";
 
-        // Update angles
         angle1 = newAngle1;
         angle2 = newAngle2;
         angle3 = newAngle3;
         angle4 = newAngle4;
     }
-
-    // Start the simulation
     function startSimulation() {
-        setInterval(updatePositions, 20); // Update positions every 20 milliseconds
+        setInterval(updatePositions, 20);
     }
 </script>
 </body>
